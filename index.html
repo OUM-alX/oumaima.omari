@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oumaima Omari | Data Analyst Portfolio</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#8B7355',secondary:'#D2B48C'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <!-- Add EmailJS library -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            color: #4A3C31;
+        }
+        
+        .hero-section {
+            background-image: url('https://readdy.ai/api/search-image?query=elegant%2520data%2520visualization%2520background%2520with%2520soft%2520gradient%2520from%2520white%2520to%2520light%2520brown%252C%2520subtle%2520data%2520patterns%2520and%2520flowing%2520lines%252C%2520abstract%2520analytical%2520elements%252C%2520minimalist%2520design%252C%2520professional%2520atmosphere%252C%2520clean%2520modern%2520aesthetic&width=1920&height=1080&seq=1&orientation=landscape');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #8B7355;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #F5F5F5;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+        
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        input, textarea, select {
+            outline: none;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            border-color: #8B7355;
+        }
+        
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        .custom-checkbox {
+            position: relative;
+            padding-left: 30px;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .custom-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            background-color: #fff;
+            border: 2px solid #8B7355;
+            border-radius: 4px;
+        }
+        
+        .custom-checkbox input:checked ~ .checkmark {
+            background-color: #8B7355;
+        }
+        
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+        
+        .custom-checkbox input:checked ~ .checkmark:after {
+            display: block;
+        }
+        
+        .custom-checkbox .checkmark:after {
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        
+        .hamburger {
+            width: 24px;
+            height: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: #4A3C31;
+            border-radius: 9px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+        
+        .hamburger span:nth-child(1) {
+            top: 0px;
+        }
+        
+        .hamburger span:nth-child(2), .hamburger span:nth-child(3) {
+            top: 9px;
+        }
+        
+        .hamburger span:nth-child(4) {
+            top: 18px;
+        }
+        
+        .hamburger.open span:nth-child(1) {
+            top: 9px;
+            width: 0%;
+            left: 50%;
+        }
+        
+        .hamburger.open span:nth-child(2) {
+            transform: rotate(45deg);
+        }
+        
+        .hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+        
+        .hamburger.open span:nth-child(4) {
+            top: 9px;
+            width: 0%;
+            left: 50%;
+        }
+        
+        .mobile-nav {
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .mobile-nav.open {
+            transform: translateY(0);
+        }
+        
+        .custom-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .custom-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #F5F5F5;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #8B7355;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .skill-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 left-0 w-full bg-white bg-opacity-95 shadow-sm z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-['Pacifico'] text-primary">Oumaima Omari</a>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-primary font-medium">Home</a>
+                <a href="#about" class="nav-link text-gray-700 hover:text-primary transition-colors">About</a>
+                <a href="#skills" class="nav-link text-gray-700 hover:text-primary transition-colors">Skills</a>
+                <a href="#portfolio" class="nav-link text-gray-700 hover:text-primary transition-colors">Portfolio</a>
+                <a href="#contact" class="nav-link text-gray-700 hover:text-primary transition-colors">Contact</a>
+            </nav>
+            
+            <!-- Mobile Navigation Toggle -->
+            <div class="md:hidden">
+                <div class="hamburger" id="hamburger-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-nav md:hidden absolute top-16 left-0 w-full bg-white shadow-md z-50">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+                <a href="#home" class="text-primary font-medium py-2 border-b border-gray-100">Home</a>
+                <a href="#about" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">About</a>
+                <a href="#skills" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Skills</a>
+                <a href="#portfolio" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Portfolio</a>
+                <a href="#contact" class="text-gray-700 hover:text-primary transition-colors py-2">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section min-h-screen flex items-center pt-16">
+        <div class="container mx-auto px-4 py-16">
+            <div class="max-w-3xl mx-auto text-center fade-in">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-primary">Oumaima Omari</h1>
+                <h2 class="text-2xl md:text-3xl font-medium mb-8 text-gray-700">Data Analyst & Visualization Expert</h2>
+                <p class="text-lg md:text-xl mb-10 text-gray-600 max-w-2xl mx-auto">
+                    Transforming complex data into actionable insights and compelling visual narratives that drive business decisions.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#about" class="bg-primary text-white px-8 py-3 rounded-button font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap">Learn More</a>
+                    <a href="#contact" class="border-2 border-primary text-primary px-8 py-3 rounded-button font-medium hover:bg-primary hover:bg-opacity-10 transition-colors whitespace-nowrap">Get in Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-primary">About Me</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Get to know my background, expertise, and what drives my passion for data analytics.</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-10 items-center">
+                <div class="w-full md:w-1/2 fade-in">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                        <div class="aspect-w-16 aspect-h-9 relative h-72 bg-gray-200">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-16 h-16 flex items-center justify-center rounded-full bg-primary bg-opacity-90 text-white cursor-pointer hover:bg-opacity-100 transition-colors">
+                                    <i class="ri-play-fill ri-2x"></i>
+                                </div>
+                                <p class="absolute bottom-4 left-4 text-white font-medium">Elevator Pitch</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-full md:w-1/2 fade-in">
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-800">Hi, I'm Oumaima Omari</h3>
+                    <p class="text-gray-600 mb-4">
+                        Oumaima Omari is a dedicated Data Analyst with a master's degree in Audit and Management Control, currently advancing her expertise through the ALX Data Analytics program. As a co-leader of Team Inua, she develops tech-based solutions to address youth unemployment, demonstrating exceptional collaboration and problem-solving abilities while tackling complex social challenges. Her vision centers on leveraging data to drive strategic decisions that improve operational efficiency.
+                    </p>
+                    <p class="text-gray-600 mb-6">
+                        Combining technical data analytics skills with a strong foundation in management control, Omari aims to create impactful solutions for the finance and technology sectors. Her notable achievements include making significant progress on the Inua youth employment initiative and creating actionable insights by merging analytical techniques with financial expertise. Omari consistently demonstrates resilience and adaptability, applying newly acquired skills to real-world scenarios that deliver tangible results.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4 mb-8">
+                        <div class="flex items-center bg-secondary bg-opacity-20 px-4 py-2 rounded-full">
+                            <div class="w-8 h-8 flex items-center justify-center mr-2">
+                                <i class="ri-graduation-cap-line text-primary"></i>
+                            </div>
+                            <span class="text-gray-700">MSc in Audit and Management Control</span>
+                        </div>
+                        <div class="flex items-center bg-secondary bg-opacity-20 px-4 py-2 rounded-full">
+                            <div class="w-8 h-8 flex items-center justify-center mr-2">
+                                <i class="ri-briefcase-line text-primary"></i>
+                            </div>
+                            <span class="text-gray-700">5+ Years Experience</span>
+                        </div>
+                        <div class="flex items-center bg-secondary bg-opacity-20 px-4 py-2 rounded-full">
+                            <div class="w-8 h-8 flex items-center justify-center mr-2">
+                                <i class="ri-award-line text-primary"></i>
+                            </div>
+                            <span class="text-gray-700">Certified Data Analyst</span> 
+                        </div>
+                    </div>
+                    
+                    <a href="_Resume - OUMAIMA OMARI.pdf" class="inline-flex items-center bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap" download>
+                        <div class="w-5 h-5 flex items-center justify-center mr-2">
+                            <i class="ri-download-line"></i>
+                        </div>
+                        Download Resume
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Expertise Section -->
+    <section id="skills" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-primary">Skills & Expertise</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">A comprehensive overview of my technical abilities and specialized knowledge in data analytics.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <!-- Data Analysis Card -->
+                <div class="skill-card bg-white rounded-lg shadow-md p-6 fade-in">
+                    <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-4">
+                        <i class="ri-bar-chart-box-line text-primary ri-lg"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Data Analysis</h3>
+                    <p class="text-gray-600 mb-4">Expert in statistical analysis, hypothesis testing, and extracting meaningful insights from complex datasets.</p>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">Statistical Methods</span>
+                                <span class="text-sm text-gray-700">95%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill bg-primary" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">Predictive Modeling</span>
+                                <span class="text-sm text-gray-700">90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill bg-primary" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">A/B Testing</span>
+                                <span class="text-sm text-gray-700">85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill bg-primary" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Data Visualization Card -->
+                <div class="skill-card bg-white rounded-lg shadow-md p-6 fade-in">
+                    <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-4">
+                        <i class="ri-pie-chart-line text-primary ri-lg"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Data Visualization</h3>
+                    <p class="text-gray-600 mb-4">Creating compelling visual narratives that communicate complex data insights effectively.</p>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">Tableau</span>
+                                <span class="text-sm text-gray-700">95%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill bg-primary" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">Power BI</span>
+                                <span class="text-sm text-gray-700">90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill bg-primary" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">D3.js</span>
+                                <span class="text-sm text-gray-700">80%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill bg-primary" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Programming Card -->
+                <div class="skill-card bg-white rounded-lg shadow-md p-6 fade-in">
+                    <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-4">
+                        <i class="ri-code-s-slash-line text-primary ri-lg"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Programming</h3>
+                    <p class="text-gray-600 mb-4">Proficient in multiple programming languages and frameworks for data manipulation and analysis.</p>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">Python</span>
+                                <span class="text-sm text-gray-700">70%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill bg-primary" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">R</span>
+                                <span class="text-sm text-gray-700">60%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill bg-primary" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">SQL</span>
+                                <span class="text-sm text-gray-700">80%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill bg-primary" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tools & Technologies Card -->
+                <div class="skill-card bg-white rounded-lg shadow-md p-6 fade-in">
+                    <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-4">
+                        <i class="ri-tools-line text-primary ri-lg"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Tools & Technologies</h3>
+                    <p class="text-gray-600 mb-4">Experience with a wide range of data tools, platforms, and technologies.</p>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">Machine Learning</span>
+                                <span class="text-sm text-gray-700">85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill bg-primary" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">Big Data (Hadoop/Spark)</span>
+                                <span class="text-sm text-gray-700">80%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill bg-primary" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">Cloud Platforms</span>
+                                <span class="text-sm text-gray-700">90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill bg-primary" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Data Expertise Visualization -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-16 fade-in">
+                <h3 class="text-xl font-semibold mb-6 text-gray-800 text-center">Data Analysis Expertise</h3>
+                <div id="skills-chart" class="w-full h-80"></div>
+            </div>
+            
+            <!-- Certifications & Education -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 fade-in">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+                        <div class="w-8 h-8 flex items-center justify-center mr-2 text-primary">
+                            <i class="ri-award-line ri-lg"></i>
+                        </div>
+                        Certifications
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex">
+                            <div class="w-8 h-8 flex items-center justify-center mr-3 mt-1">
+                                <i class="ri-checkbox-circle-line text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-800">AI Career Essentials</h4>
+                                <p class="text-sm text-gray-600">ALX Africa, 2024</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="w-8 h-8 flex items-center justify-center mr-3 mt-1">
+                                <i class="ri-checkbox-circle-line text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-800">Power BI Certification</h4>
+                                <p class="text-sm text-gray-600">DataCoach Académie, 2023</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="w-8 h-8 flex items-center justify-center mr-3 mt-1">
+                                <i class="ri-checkbox-circle-line text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-800">Excel skills for business:
+                                    Advanced</h4>
+                                <p class="text-sm text-gray-600">Macquarie University - Coursera, 2021</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="w-8 h-8 flex items-center justify-center mr-3 mt-1">
+                                <!-- i class="ri-checkbox-circle-line text-primary"></-i -->
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-800"></h4>
+                                <p class="text-sm text-gray-600"></p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+                        <div class="w-8 h-8 flex items-center justify-center mr-2 text-primary">
+                            <i class="ri-graduation-cap-line ri-lg"></i>
+                        </div>
+                        Education
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex">
+                            <div class="w-8 h-8 flex items-center justify-center mr-3 mt-1">
+                                <i class="ri-building-4-line text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-800">ALX Program | Data Analytics</h4>
+                                <p class="text-sm text-gray-600">ALX Africa, Present</p>
+                                <p class="text-sm text-gray-600 mt-1">Specialized in predictive analytics and machine learning applications.</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="w-8 h-8 flex items-center justify-center mr-3 mt-1">
+                                <i class="ri-building-4-line text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-800">Master's Degree in Audit and
+                                    Management Control</h4>
+                                <p class="text-sm text-gray-600">High-Technology school in Morocco, 2013-2018</p>
+                                <p class="text-sm text-gray-600 mt-1">Valedictorian.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--
+    <!-- Portfolio Section -->
+    <!--
+    <section id="portfolio" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-primary">Portfolio</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">A showcase of my data analytics projects and case studies across various industries.</p>
+            </div>
+            
+            <!-- Portfolio Filter -->
+            <!-- <div class="flex flex-wrap justify-center gap-3 mb-10 fade-in">
+                <button class="bg-primary text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap">All Projects</button>
+                <button class="bg-white text-gray-700 px-5 py-2 rounded-full text-sm font-medium hover:bg-gray-100 transition-colors whitespace-nowrap">Data Analysis</button>
+                <button class="bg-white text-gray-700 px-5 py-2 rounded-full text-sm font-medium hover:bg-gray-100 transition-colors whitespace-nowrap">Visualization</button>
+                <button class="bg-white text-gray-700 px-5 py-2 rounded-full text-sm font-medium hover:bg-gray-100 transition-colors whitespace-nowrap">Machine Learning</button>
+                <button class="bg-white text-gray-700 px-5 py-2 rounded-full text-sm font-medium hover:bg-gray-100 transition-colors whitespace-nowrap">Business Intelligence</button>
+            </div> -->
+            
+            <!-- Portfolio Grid -->
+            <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <!-- <div class="project-card bg-white rounded-lg shadow-md overflow-hidden fade-in">
+                    <div class="h-48 bg-gray-200 relative">
+                        <img src="https://readdy.ai/api/search-image?query=data%2520visualization%2520dashboard%2520with%2520charts%2520and%2520graphs%2520showing%2520retail%2520sales%2520analytics%252C%2520professional%2520business%2520intelligence%2520interface%252C%2520clean%2520modern%2520design%252C%2520blue%2520and%2520white%2520color%2520scheme%252C%2520detailed%2520KPI%2520metrics%2520and%2520performance%2520indicators&width=600&height=400&seq=2&orientation=landscape" alt="Retail Analytics Dashboard" class="w-full h-full object-cover object-top">
+                        <div class="absolute top-3 right-3 bg-primary text-white text-xs font-medium px-3 py-1 rounded-full">
+                            Data Visualization
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Retail Analytics Dashboard</h3>
+                        <p class="text-gray-600 mb-4">
+                            Developed an interactive dashboard for a major retail chain that increased sales visibility and improved inventory management by 23%.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">Tableau</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">SQL</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">Python</span>
+                        </div>
+                        <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
+                            View Project
+                            <div class="w-5 h-5 flex items-center justify-center ml-1">
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div> -->
+                
+                <!-- Project 2 -->
+                <!-- <div class="project-card bg-white rounded-lg shadow-md overflow-hidden fade-in">
+                    <div class="h-48 bg-gray-200 relative">
+                        <img src="https://readdy.ai/api/search-image?query=healthcare%2520predictive%2520analytics%2520model%2520visualization%252C%2520patient%2520outcome%2520prediction%2520system%252C%2520medical%2520data%2520analysis%2520charts%252C%2520professional%2520healthcare%2520analytics%2520dashboard%252C%2520clean%2520modern%2520design%2520with%2520medical%2520symbols%252C%2520detailed%2520statistical%2520graphs&width=600&height=400&seq=3&orientation=landscape" alt="Healthcare Predictive Model" class="w-full h-full object-cover object-top">
+                        <div class="absolute top-3 right-3 bg-primary text-white text-xs font-medium px-3 py-1 rounded-full">
+                            Machine Learning
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Healthcare Predictive Model</h3>
+                        <p class="text-gray-600 mb-4">
+                            Built a machine learning model that predicts patient readmission risk with 87% accuracy, helping a hospital network reduce readmissions by 15%.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">Python</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">Scikit-learn</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">TensorFlow</span>
+                        </div>
+                        <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
+                            View Project
+                            <div class="w-5 h-5 flex items-center justify-center ml-1">
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div> -->
+                
+                <!-- Project 3 -->
+             <!--   <div class="project-card bg-white rounded-lg shadow-md overflow-hidden fade-in">
+                    <div class="h-48 bg-gray-200 relative">
+                        <img src="https://readdy.ai/api/search-image?query=financial%2520market%2520analysis%2520dashboard%2520with%2520stock%2520price%2520charts%252C%2520trend%2520analysis%252C%2520investment%2520performance%2520metrics%252C%2520professional%2520financial%2520data%2520visualization%252C%2520clean%2520modern%2520design%2520with%2520financial%2520symbols%252C%2520detailed%2520market%2520indicators&width=600&height=400&seq=4&orientation=landscape" alt="Financial Market Analysis" class="w-full h-full object-cover object-top">
+                        <div class="absolute top-3 right-3 bg-primary text-white text-xs font-medium px-3 py-1 rounded-full">
+                            Data Analysis
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Financial Market Analysis</h3>
+                        <p class="text-gray-600 mb-4">
+                            Conducted comprehensive analysis of market trends for an investment firm, resulting in portfolio optimization and 12% increased returns.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">R</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">Power BI</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">Financial Modeling</span>
+                        </div>
+                        <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
+                            View Project
+                            <div class="w-5 h-5 flex items-center justify-center ml-1">
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+            <!--    <div class="project-card bg-white rounded-lg shadow-md overflow-hidden fade-in">
+                    <div class="h-48 bg-gray-200 relative">
+                        <img src="https://readdy.ai/api/search-image?query=e-commerce%2520customer%2520segmentation%2520analysis%2520visualization%252C%2520user%2520behavior%2520clusters%252C%2520shopping%2520patterns%2520analysis%252C%2520professional%2520marketing%2520analytics%2520dashboard%252C%2520clean%2520modern%2520design%2520with%2520shopping%2520symbols%252C%2520detailed%2520customer%2520journey%2520maps&width=600&height=400&seq=5&orientation=landscape" alt="E-commerce Customer Segmentation" class="w-full h-full object-cover object-top">
+                        <div class="absolute top-3 right-3 bg-primary text-white text-xs font-medium px-3 py-1 rounded-full">
+                            Business Intelligence
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">E-commerce Customer Segmentation</h3>
+                        <p class="text-gray-600 mb-4">
+                            Implemented customer segmentation analysis for an e-commerce platform, leading to personalized marketing campaigns and 28% higher conversion rates.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">Python</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">K-means Clustering</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">Tableau</span>
+                        </div>
+                        <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
+                            View Project
+                            <div class="w-5 h-5 flex items-center justify-center ml-1">
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+             <!--    <div class="project-card bg-white rounded-lg shadow-md overflow-hidden fade-in">
+                    <div class="h-48 bg-gray-200 relative">
+                        <img src="https://readdy.ai/api/search-image?query=supply%2520chain%2520optimization%2520dashboard%2520with%2520logistics%2520flow%2520charts%252C%2520inventory%2520management%2520metrics%252C%2520distribution%2520network%2520analysis%252C%2520professional%2520supply%2520chain%2520analytics%2520interface%252C%2520clean%2520modern%2520design%2520with%2520logistics%2520symbols%252C%2520detailed%2520operational%2520KPIs&width=600&height=400&seq=6&orientation=landscape" alt="Supply Chain Optimization" class="w-full h-full object-cover object-top">
+                        <div class="absolute top-3 right-3 bg-primary text-white text-xs font-medium px-3 py-1 rounded-full">
+                            Data Analysis
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Supply Chain Optimization</h3>
+                        <p class="text-gray-600 mb-4">
+                            Analyzed and optimized supply chain operations for a manufacturing company, reducing costs by 18% and improving delivery times by 22%.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">SQL</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">Excel</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">Power BI</span>
+                        </div>
+                        <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
+                            View Project
+                            <div class="w-5 h-5 flex items-center justify-center ml-1">
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+            <!--     <div class="project-card bg-white rounded-lg shadow-md overflow-hidden fade-in">
+                    <div class="h-48 bg-gray-200 relative">
+                        <img src="https://readdy.ai/api/search-image?query=social%2520media%2520sentiment%2520analysis%2520dashboard%2520with%2520text%2520mining%2520visualizations%252C%2520opinion%2520analysis%2520charts%252C%2520brand%2520perception%2520metrics%252C%2520professional%2520social%2520media%2520analytics%2520interface%252C%2520clean%2520modern%2520design%2520with%2520communication%2520symbols%252C%2520detailed%2520sentiment%2520indicators&width=600&height=400&seq=7&orientation=landscape" alt="Social Media Sentiment Analysis" class="w-full h-full object-cover object-top">
+                        <div class="absolute top-3 right-3 bg-primary text-white text-xs font-medium px-3 py-1 rounded-full">
+                            Machine Learning
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Social Media Sentiment Analysis</h3>
+                        <p class="text-gray-600 mb-4">
+                            Developed a sentiment analysis tool for social media monitoring, helping a brand improve customer satisfaction by identifying and addressing pain points.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">NLP</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">Python</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">BERT</span>
+                        </div>
+                        <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
+                            View Project
+                            <div class="w-5 h-5 flex items-center justify-center ml-1">
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="text-center mt-12 fade-in">
+                <a href="#" class="inline-flex items-center bg-primary text-white px-8 py-3 rounded-button font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap">
+                    View All Projects
+                    <div class="w-5 h-5 flex items-center justify-center ml-2">
+                        <i class="ri-arrow-right-line"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    -->
+    -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-primary">Get in Touch</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Interested in working together? I'd love to hear from you. Reach out to discuss how I can help with your data analytics needs.</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-10">
+                <!-- Contact Form -->
+                <div class="w-full lg:w-1/2 fade-in">
+                    <div class="bg-white rounded-lg shadow-md p-8">
+                        <h3 class="text-2xl font-semibold mb-6 text-gray-800">Send a Message</h3>
+                        <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                    <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary focus:ring-0 text-gray-700" placeholder="Your name" required>
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                                    <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary focus:ring-0 text-gray-700" placeholder="Your email" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                                <div class="relative">
+                                    <select id="subject" name="subject" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary focus:ring-0 text-gray-700 appearance-none pr-8" required>
+                                        <option value="" disabled selected>Select a subject</option>
+                                        <option value="project">Project Inquiry</option>
+                                        <option value="job">Job Opportunity</option>
+                                        <option value="collaboration">Collaboration</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                                        <div class="w-5 h-5 flex items-center justify-center text-gray-500">
+                                            <i class="ri-arrow-down-s-line"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                                <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary focus:ring-0 text-gray-700" placeholder="Your message" required></textarea>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" name="agreement" required>
+                                    <span class="checkmark"></span>
+                                    <span class="text-sm text-gray-600">I agree to the processing of my personal data for contact purposes.</span>
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="w-full lg:w-1/2 fade-in">
+                    <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+                        <h3 class="text-2xl font-semibold mb-6 text-gray-800">Contact Information</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4 mt-1">
+                                    <i class="ri-mail-line text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800 mb-1">Email</h4>
+                                    <p class="text-gray-600"><a href="mailto:omarii.oumaima@gmail.com">omarii.oumaima@gmail.com</a></p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4 mt-1">
+                                    <i class="ri-phone-line text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800 mb-1">Phone</h4>
+                                    <p class="text-gray-600"><a href="tel:+212675518984">+212 675 51 89 84</a></p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4 mt-1">
+                                    <i class="ri-map-pin-line text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800 mb-1">Location</h4>
+                                    <p class="text-gray-600">Morocco</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4 mt-1">
+                                    <i class="ri-time-line text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800 mb-1">Availability</h4>
+                                    <p class="text-gray-600">Monday - Friday, 9:00 AM - 6:00 PM GMT+1</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="font-medium text-gray-800 mb-4">Connect with me</h4>
+                            <div class="flex space-x-4">
+                                <a href="https://www.linkedin.com/in/omarioumaima/" class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary hover:bg-primary hover:text-white transition-colors">
+                                    <i class="ri-linkedin-fill"></i>
+                                </a>
+                                <a href="github.com/OUM-alX" class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary hover:bg-primary hover:text-white transition-colors">
+                                    <i class="ri-github-fill"></i>
+                                </a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Availability</h3>
+                        <p class="text-gray-600 mb-6">
+                            Currently available for freelance projects, consulting work, and full-time opportunities in data analytics and visualization.
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="bg-primary bg-opacity-10 text-primary text-sm px-4 py-2 rounded-full">Remote Work</span>
+                            <span class="bg-primary bg-opacity-10 text-primary text-sm px-4 py-2 rounded-full">Contract</span>
+                            <span class="bg-primary bg-opacity-10 text-primary text-sm px-4 py-2 rounded-full">Full-time</span>
+                            <span class="bg-primary bg-opacity-10 text-primary text-sm px-4 py-2 rounded-full">Consulting</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+                    
+                 <p class="text-center">
+                    © 2025 Oumaima Omari. All rights reserved.
+                </p>
+                
+                 
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 bg-primary text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300 hover:bg-opacity-90">
+        <i class="ri-arrow-up-line ri-lg"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Navigation Toggle
+            const hamburger = document.getElementById('hamburger-toggle');
+            const mobileNav = document.querySelector('.mobile-nav');
+            
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('open');
+                mobileNav.classList.toggle('open');
+            });
+            
+            // Close mobile nav when clicking a link
+            const mobileNavLinks = mobileNav.querySelectorAll('a');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('open');
+                    mobileNav.classList.remove('open');
+                });
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Active navigation link based on scroll position
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            function setActiveLink() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            // Back to top button
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            function toggleBackToTopButton() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.remove('opacity-0', 'invisible');
+                    backToTopButton.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopButton.classList.remove('opacity-100', 'visible');
+                    backToTopButton.classList.add('opacity-0', 'invisible');
+                }
+            }
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            window.addEventListener('scroll', function() {
+                setActiveLink();
+                toggleBackToTopButton();
+            });
+            
+            // Fade-in animation for elements
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        fadeInObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                fadeInObserver.observe(element);
+            });
+            
+            // Contact Form Validation
+            const contactForm = document.getElementById('contact-form');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    // Form will be submitted to Formspree automatically
+                    // We just need to show loading state
+                    const submitButton = contactForm.querySelector('button[type="submit"]');
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = 'Sending...';
+                });
+            }
+            
+            // Initialize Skills Chart
+            const skillsChart = document.getElementById('skills-chart');
+            if (skillsChart) {
+                const chart = echarts.init(skillsChart);
+                
+                const option = {
+                    animation: false,
+                    tooltip: {
+                        trigger: 'axis',
+                        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                        textStyle: {
+                            color: '#1f2937'
+                        }
+                    },
+                    radar: {
+                        indicator: [
+                            { name: 'Statistical Analysis', max: 100 },
+                            { name: 'Data Visualization', max: 100 },
+                            { name: 'Machine Learning', max: 100 },
+                            { name: 'Programming', max: 100 },
+                            { name: 'Database Management', max: 100 },
+                            { name: 'Business Intelligence', max: 100 }
+                        ],
+                        splitArea: {
+                            areaStyle: {
+                                color: ['rgba(255, 255, 255, 0.03)', 'rgba(255, 255, 255, 0.05)'],
+                                shadowColor: 'rgba(0, 0, 0, 0.05)',
+                                shadowBlur: 10
+                            }
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: 'rgba(211, 211, 211, 0.3)'
+                            }
+                        },
+                        splitLine: {
+                            lineStyle: {
+                                color: 'rgba(211, 211, 211, 0.3)'
+                            }
+                        }
+                    },
+                    series: [
+                        {
+                            name: 'Skills Proficiency',
+                            type: 'radar',
+                            data: [
+                                {
+                                    value: [95, 92, 85, 90, 88, 93],
+                                    name: 'Skill Level',
+                                    areaStyle: {
+                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                            { offset: 0, color: 'rgba(87, 181, 231, 0.1)' },
+                                            { offset: 1, color: 'rgba(87, 181, 231, 0.1)' }
+                                        ])
+                                    },
+                                    lineStyle: {
+                                        color: 'rgba(87, 181, 231, 1)',
+                                        width: 2
+                                    },
+                                    itemStyle: {
+                                        color: 'rgba(87, 181, 231, 1)'
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    grid: {
+                        top: 0,
+                        right: 0,
+                        bottom: 0,
+                        left: 0
+                    },
+                    textStyle: {
+                        color: '#1f2937'
+                    }
+                };
+                
+                chart.setOption(option);
+                
+                window.addEventListener('resize', function() {
+                    chart.resize();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
