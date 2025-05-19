@@ -324,12 +324,15 @@
                 <div class="w-full md:w-1/2 fade-in">
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                         <div class="aspect-w-16 aspect-h-9 relative h-72 bg-gray-200">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="w-16 h-16 flex items-center justify-center rounded-full bg-primary bg-opacity-90 text-white cursor-pointer hover:bg-opacity-100 transition-colors">
-                                    <i class="ri-play-fill ri-2x"></i>
-                                </div>
-                                <p class="absolute bottom-4 left-4 text-white font-medium">Elevator Pitch</p>
-                            </div>
+                            <iframe 
+                                class="w-full h-full"
+                                src="https://www.youtube.com/embed/GzJjDRuRIt0?si=i6YuBrdyidm_Huzx" 
+                                title="YouTube video player" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen>
+                            </iframe>
                         </div>
                     </div>
                 </div>
@@ -1177,6 +1180,26 @@
                 
                 window.addEventListener('resize', function() {
                     chart.resize();
+                });
+            }
+
+            // Video Player Functionality
+            const video = document.getElementById('elevator-pitch');
+            const playButton = document.getElementById('play-button');
+            const videoOverlay = document.getElementById('video-overlay');
+
+            if (video && playButton && videoOverlay) {
+                playButton.addEventListener('click', function() {
+                    video.play();
+                    videoOverlay.style.display = 'none';
+                });
+
+                video.addEventListener('pause', function() {
+                    videoOverlay.style.display = 'flex';
+                });
+
+                video.addEventListener('ended', function() {
+                    videoOverlay.style.display = 'flex';
                 });
             }
         });
